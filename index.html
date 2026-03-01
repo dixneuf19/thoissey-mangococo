@@ -373,6 +373,20 @@
       margin-bottom: 1rem;
     }
 
+    .insta-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 1rem;
+      transition: opacity 0.3s;
+    }
+
+    .insta-link:hover {
+      opacity: 0.7;
+    }
+
     /* SCROLL REVEAL */
     .reveal {
       opacity: 0;
@@ -486,7 +500,10 @@
       Candidature pour la 21&egrave;me &eacute;dition du Festival de Fanfares Festives<br>Thoissey, 1er ao&ucirc;t
       2026<br>
       Organis&eacute; par la Feri'Ain des Fanfarons<br><br>
-      Tattoo designs par <strong>Michalon</strong> &bull; Photos par la team Mango Coco
+      Tattoo designs par <strong>Michalon</strong> &bull; Photos par la team Mango Coco<br><br>
+      <a href="https://www.instagram.com/mango.coco.brassband/" target="_blank" rel="noopener" class="insta-link">&#9741; @mango.coco.brassband</a>
+      &nbsp;&nbsp;
+      <a href="https://www.youtube.com/watch?v=nY1HlV-he2U" target="_blank" rel="noopener" class="insta-link">&#9654; YouTube</a>
     </p>
   </footer>
 
@@ -528,6 +545,25 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') navLightbox(e, -1);
       if (e.key === 'ArrowRight') navLightbox(e, 1);
+    });
+
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var lb = document.getElementById('lightbox');
+
+    lb.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lb.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) < 50) return;
+      if (diff > 0) {
+        navLightbox(e, 1);
+      } else {
+        navLightbox(e, -1);
+      }
     });
 
     var observer = new IntersectionObserver(function (entries) {
